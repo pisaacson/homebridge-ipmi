@@ -1,5 +1,5 @@
 'use strict';
-
+var inherits = require('util').inherits;
 const IPMI = require('node-ipmi');
 const exec = require('child_process').exec; // TODO: move to node-ipmi
 
@@ -24,6 +24,9 @@ module.exports = (homebridge) => {
 		});
 		this.value = this.getDefaultValue();
 	};
+  IPMIPlugin.CurrentVoltageReading = 'E863F10A-079E-48FF-8F27-9C2605A29F52';
+  inherits(IPMIPlugin.CurrentVoltageReading, Characteristic);
+
 	IPMIPlugin.CurrentPowerConsumption = function () {
 		Characteristic.call(this, 'Consumption', 'E863F10D-079E-48FF-8F27-9C2605A29F52');
 		this.setProps({
