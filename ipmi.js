@@ -1,7 +1,6 @@
 'use strict';
 var inherits = require('util').inherits;
 var path = require("path");
-var mh = require(path.join(__dirname, '/lib/mhclient'));
 var sprintf = require("sprintf-js").sprintf, inherits = require("util").inherits;
 var events = require('events'), util = require('util'), fs = require('fs');
 var Accessory, Characteristic, Service, UUIDGen;
