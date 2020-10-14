@@ -12,7 +12,7 @@ module.exports = (homebridge) => {
   var FakeGatoHistoryService = require('fakegato-history')(homebridge);
 
 	/* Try to map Elgato custom vars */
-	CurrentVoltageReading = function () {
+	IPMIPlugin.CurrentVoltageReading = function () {
 		Characteristic.call(this, 'Volt', 'E863F10A-079E-48FF-8F27-9C2605A29F52');
 		this.setProps({
 			format: Characteristic.Formats.FLOAT,
@@ -24,7 +24,7 @@ module.exports = (homebridge) => {
 		});
 		this.value = this.getDefaultValue();
 	};
-	CurrentPowerConsumption = function () {
+	IPMIPlugin.CurrentPowerConsumption = function () {
 		Characteristic.call(this, 'Consumption', 'E863F10D-079E-48FF-8F27-9C2605A29F52');
 		this.setProps({
 			format: Characteristic.Formats.UINT16,
@@ -36,10 +36,10 @@ module.exports = (homebridge) => {
 		});
 		this.value = this.getDefaultValue();
 	};
-	CurrentPowerConsumption.UUID = 'E863F10D-079E-48FF-8F27-9C2605A29F52';
-	inherits(CurrentPowerConsumption, Characteristic);
+	IPMIPlugin.CurrentPowerConsumption.UUID = 'E863F10D-079E-48FF-8F27-9C2605A29F52';
+	inherits(IPMIPlugin.CurrentPowerConsumption, Characteristic);
 
-	TotalConsumption = function () {
+	IPMIPlugin.TotalConsumption = function () {
 		Characteristic.call(this, 'Energy', 'E863F10C-079E-48FF-8F27-9C2605A29F52');
 		this.setProps({
 			format: Characteristic.Formats.FLOAT,
@@ -51,10 +51,10 @@ module.exports = (homebridge) => {
 		});
 		this.value = this.getDefaultValue();
 	};
-	TotalConsumption.UUID = 'E863F10C-079E-48FF-8F27-9C2605A29F52';
-	inherits(TotalConsumption, Characteristic);
+	IPMIPlugin.TotalConsumption.UUID = 'E863F10C-079E-48FF-8F27-9C2605A29F52';
+	inherits(IPMIPlugin.TotalConsumption, Characteristic);
 
-	ResetTotal = function () {
+	IPMIPlugin.ResetTotal = function () {
 		Characteristic.call(this, 'Reset', 'E863F112-079E-48FF-8F27-9C2605A29F52');
 		this.setProps({
 			format: Characteristic.Formats.UINT32,
@@ -62,19 +62,20 @@ module.exports = (homebridge) => {
 		});
 		this.value = this.getDefaultValue();
 	};
-	ResetTotal.UUID = 'E863F112-079E-48FF-8F27-9C2605A29F52';
-	inherits(ResetTotal, Characteristic);
+	IPMIPlugin.ResetTotal.UUID = 'E863F112-079E-48FF-8F27-9C2605A29F52';
+	inherits(IPMIPlugin.ResetTotal, Characteristic);
 
-	PowerMeterService = function (displayName, subtype) {
+	IPMIPlugin.PowerMeterService = function (displayName, subtype) {
 		Service.call(this, displayName, '00000001-0000-1777-8000-775D67EC4377', subtype);
-		this.addCharacteristic(CurrentPowerConsumption);
-		this.addCharacteristic(TotalConsumption);
-		this.addCharacteristic(ResetTotal);
+		this.addCharacteristic(IPMIPlugin.CurrentPowerConsumption);
+		this.addCharacteristic(IPMIPlugin.TotalConsumption);
+		this.addCharacteristic(IPMIPlugin.ResetTotal);
 	};
-	inherits(PowerMeterService, Service);
+	inherits(IPMIPlugin.PowerMeterService, Service);
 
-	FakeGatoHistoryService = FakeGatoHistoryService;
-	inherits(FakeGatoHistoryService, Service);
+	IPMIPlugin.FakeGatoHistoryService = FakeGatoHistoryService;
+	inherits(IPMIPlugin.FakeGatoHistoryService, Service);
+
 
   homebridge.registerAccessory('homebridge-ipmi', 'IPMI', IPMIPlugin);
 };
