@@ -13,7 +13,7 @@ const exec = require('child_process').exec; // TODO: move to node-ipmi
 
 //let Service, Characteristic;
 
-module.exports = function(homebridge) => {
+module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   Accessory = homebridge.platformAccessory;
