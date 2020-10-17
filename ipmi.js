@@ -1,15 +1,5 @@
 'use strict';
 var inherits = require('util').inherits;
-var path = require("path");
-var mh = require(path.join(__dirname, '/lib/mhclient'));
-var sprintf = require("sprintf-js").sprintf, inherits = require("util").inherits;
-var events = require('events'), util = require('util'), fs = require('fs');
-var Accessory, Characteristic, Service, UUIDGen;
-var moment = require('moment');
-var correctingInterval = require('correcting-interval');
-const version = require('./package.json').version;
-const Format = require('util').format;
-
 const IPMI = require('node-ipmi');
 const exec = require('child_process').exec; // TODO: move to node-ipmi
 
