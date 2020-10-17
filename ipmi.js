@@ -1,4 +1,5 @@
 'use strict';
+var inherits = require('util').inherits;
 var path = require("path");
 var sprintf = require("sprintf-js").sprintf, inherits = require("util").inherits;
 var events = require('events'), util = require('util'), fs = require('fs');
@@ -16,8 +17,7 @@ const exec = require('child_process').exec; // TODO: move to node-ipmi
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  Accessory = homebridge.platformAccessory;
-  UUIDGen = homebridge.hap.uuid;
+
   var FakeGatoHistoryService = require('fakegato-history')(homebridge);
 
 	/* Try to map Elgato custom vars */
