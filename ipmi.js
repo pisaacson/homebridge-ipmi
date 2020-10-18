@@ -111,7 +111,7 @@ class IPMIPlugin
       this.sensors.push(fan);
     });
 
-    Object.keys(this.PowerMeter).forEach((ipminame) => {
+    Object.keys(this.PowerMeter).forEach((ipmiName) => {
       const name = this.PowerMeter[ipmiName];
       const subtype = ipmiName;
       const PM = new Service.PowerMeter(name,subtype);
