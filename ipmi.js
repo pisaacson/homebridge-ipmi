@@ -67,6 +67,9 @@ class IPMIPlugin
                         'FAN 4': 'Fan 4',
                         'FAN A': 'Fan A'
                 };
+    this.PowerMeter = config.powerSensors || {
+                        'PW Consumption': 'Input Power'
+                };
     this.identify = config.identify !== undefined ? config.identify : "Blink";
 
     this.server = new IPMI(this.hostname, this.username, this.password);
@@ -107,6 +110,17 @@ class IPMIPlugin
         .on('get', this.getFanRotationSpeed.bind(this, ipmiName));
       this.sensors.push(fan);
     });
+
+    Object.keys(this.PowerMeter).forEach((ipminame) => {
+      const name.PowerMeter[ipmiName];
+      const subtype = ipmiName;
+      const PM = new Service.PowerMeter(name,subtype);
+      PM
+        .getCharacteristic(Characteristic.CurrentConsumption)
+        .on('get', this.getPower.bind(this, ipmiName));
+      this.sensors.push(PM);
+    });
+
   }
 
   getIdentify(cb) {
