@@ -114,7 +114,7 @@ class IPMIPlugin
     Object.keys(this.PowerMeter).forEach((ipmiName) => {
       const name = this.PowerMeter[ipmiName];
       const subtype = ipmiName;
-      const PM = new IPMIService.CurrentConsumption(name, subtype);
+      const PM = new IPMIService.PowerMeter(name, subtype);
       PM
         .getCharacteristic(Characteristic.CurrentConsumption)
         .on('get', this.getPower.bind(this, ipmiName));
