@@ -5,6 +5,30 @@ const exec = require('child_process').exec; // TODO: move to node-ipmi
 
 let Service, Characteristic;
 
+const homebridgeLib = require('homebridge-lib')
+
+class IPMIService extends homebridgeLib.ServiceDelegate {
+
+  static get Voltage () {return Voltage }
+
+  static get CurrentConsumption () {return CurrentConsumption }
+
+  static get TotalConsumption () {return TotalConsumption }
+
+}
+
+class Voltage extends IPMIService {
+  constructor (IPMIPlugin, params = {}) {
+    params.name = IPMIPlugin.name + 'Voltage'
+    params.Service = IPMIPlugin.Services.evePowerMeter
+    super(IPMIPlugin, params)
+    this.addCharacteristicDelegate({
+      key: 'Voltage',
+      Characteristic: this.Characteristics.eve.Voltage
+    })
+  }
+}
+
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
@@ -50,7 +74,7 @@ class IPMIPlugin
         .getCharacteristic(Characteristic.On)
         .on('get', this.getIdentify.bind(this))
         .on('set', this.setIdentify.bind(this));
-      this.sensors.push(switchSensor);	     
+      this.sensors.push(switchSensor);
     }
 
     Object.keys(this.temperatureSensors).forEach((ipmiName) => {
