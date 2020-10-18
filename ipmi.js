@@ -17,14 +17,22 @@ class IPMIService extends homebridgeLib.ServiceDelegate {
 
 }
 
-class Voltage extends IPMIService {
+class PowerMeter extends IPMIService {
   constructor (IPMIPlugin, params = {}) {
-    params.name = IPMIPlugin.name + 'Voltage'
+    params.name = IPMIPlugin.name + 'PowerMeter'
     params.Service = IPMIPlugin.Services.evePowerMeter
     super(IPMIPlugin, params)
     this.addCharacteristicDelegate({
       key: 'Voltage',
       Characteristic: this.Characteristics.eve.Voltage
+    })
+    this.addCharacteristicDelegate({
+      key: 'TotalConsumption',
+      Characteristic: this.Characteristics.eve.TotalConsumption
+    })
+    this.addCharacteristicDelegate({
+      key: 'CurrentConsumption',
+      Characteristic: this.Characteristics.eve.CurrentConsumption
     })
   }
 }
