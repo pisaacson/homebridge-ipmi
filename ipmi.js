@@ -112,7 +112,7 @@ class IPMIPlugin
     });
 
     Object.keys(this.PowerMeter).forEach((ipminame) => {
-      const name.PowerMeter[ipmiName];
+      const name = this.PowerMeter[ipmiName];
       const subtype = ipmiName;
       const PM = new Service.PowerMeter(name,subtype);
       PM
